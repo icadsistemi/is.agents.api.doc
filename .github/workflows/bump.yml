@@ -6,7 +6,7 @@ on:
 
 jobs:
   api-doc-deploy:
-    name: Deploy API POS doc on Bump
+    name: Deploy Data Collection Agents API doc on Bump
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,6 +16,6 @@ jobs:
         with:
           doc: ${{ vars.BUMP_DOC_ID }}
           token: ${{ secrets.BUMP_TOKEN }}
-          file: reference/is.dc.api.doc.yaml
+          file: reference/is.agents.api.doc.yaml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
