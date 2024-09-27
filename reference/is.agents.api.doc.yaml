@@ -110,7 +110,7 @@ paths:
       security:
         - Cognito: []
       operationId: installer-agents-download
-      description: ''
+      description: API used to download the agent binary. The name of the agents is taken from the version API and sent via the header "x-agent-name".
       summary: Download Agent
   /installer/license:
     get:
@@ -209,241 +209,93 @@ paths:
       responses:
         '200':
           description: 200 response
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: 401 response
           content: {}
+        '403':
+          description: 403 response
+          content: {}
+      security:
+        - Cognito: []
+      operationId: manage-update
+      description: |-
+        API used to retrieve the binary of the update. 
+
+        It uses the username from the token (ISCode) and the vendor header as key: {vendor}/{iscode}
+
+        The binary needs to be created calling the API /manage/update/{vendor} and it expires after 24 hours.
+      summary: Get Update Binary
+  '/manage/update/{vendor}':
+    get:
+      responses:
+        '200':
+          description: 200 response. It replies with a key (MD5) of the file in order to check it after dowloading it.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key:
+                    type: string
+                    x-stoplight:
+                      id: z4wfzangr7gyi
         '204':
-          description: 204 response
-          content: {}
-        '300':
-          description: 300 response
-          content: {}
+          description: 'No Content. When there''s no upload '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Def-APIGW-Response'
         '400':
           description: 400 response
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Def-APIGW-Response'
         '401':
           description: 401 response
-          content: {}
-        '403':
-          description: 403 response
-          content: {}
-        '404':
-          description: 404 response
-          content: {}
-        '422':
-          description: 422 response
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Def-APIGW-Response'
         '500':
           description: 500 response
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Def-APIGW-Response'
       security:
         - Cognito: []
-  /manage/update/gilbarco:
-    get:
-      responses:
-        '200':
-          description: 200 response
-          content: {}
-        '201':
-          description: 201 response
-          content: {}
-        '202':
-          description: 202 response
-          content: {}
-        '400':
-          description: 400 response
-          content: {}
-        '401':
-          description: 401 response
-          content: {}
-        '403':
-          description: 403 response
-          content: {}
-        '500':
-          description: 500 response
-          content: {}
-      security:
-        - Cognito: []
-  /manage/update/gilbarcobeta:
-    get:
-      responses:
-        '200':
-          description: 200 response
-          content: {}
-        '201':
-          description: 201 response
-          content: {}
-        '202':
-          description: 202 response
-          content: {}
-        '400':
-          description: 400 response
-          content: {}
-        '401':
-          description: 401 response
-          content: {}
-        '403':
-          description: 403 response
-          content: {}
-        '500':
-          description: 500 response
-          content: {}
-      security:
-        - Cognito: []
-  /manage/update/iscontroller:
-    get:
-      responses:
-        '200':
-          description: 200 response
-          content: {}
-        '201':
-          description: 201 response
-          content: {}
-        '202':
-          description: 202 response
-          content: {}
-        '400':
-          description: 400 response
-          content: {}
-        '401':
-          description: 401 response
-          content: {}
-        '403':
-          description: 403 response
-          content: {}
-        '500':
-          description: 500 response
-          content: {}
-      security:
-        - Cognito: []
-  /manage/update/iscontrollerbeta:
-    get:
-      responses:
-        '200':
-          description: 200 response
-          content: {}
-        '201':
-          description: 201 response
-          content: {}
-        '202':
-          description: 202 response
-          content: {}
-        '400':
-          description: 400 response
-          content: {}
-        '401':
-          description: 401 response
-          content: {}
-        '403':
-          description: 403 response
-          content: {}
-        '500':
-          description: 500 response
-          content: {}
-      security:
-        - Cognito: []
-  /manage/update/loyalty:
-    get:
-      responses:
-        '200':
-          description: 200 response
-          content: {}
-        '201':
-          description: 201 response
-          content: {}
-        '202':
-          description: 202 response
-          content: {}
-        '400':
-          description: 400 response
-          content: {}
-        '401':
-          description: 401 response
-          content: {}
-        '403':
-          description: 403 response
-          content: {}
-        '500':
-          description: 500 response
-          content: {}
-      security:
-        - Cognito: []
-  /manage/update/loyaltybeta:
-    get:
-      responses:
-        '200':
-          description: 200 response
-          content: {}
-        '201':
-          description: 201 response
-          content: {}
-        '202':
-          description: 202 response
-          content: {}
-        '400':
-          description: 400 response
-          content: {}
-        '401':
-          description: 401 response
-          content: {}
-        '403':
-          description: 403 response
-          content: {}
-        '500':
-          description: 500 response
-          content: {}
-      security:
-        - Cognito: []
-  /manage/update/wayne:
-    get:
-      responses:
-        '200':
-          description: 200 response
-          content: {}
-        '201':
-          description: 201 response
-          content: {}
-        '202':
-          description: 202 response
-          content: {}
-        '400':
-          description: 400 response
-          content: {}
-        '401':
-          description: 401 response
-          content: {}
-        '403':
-          description: 403 response
-          content: {}
-        '500':
-          description: 500 response
-          content: {}
-      security:
-        - Cognito: []
-  /manage/update/waynebeta:
-    get:
-      responses:
-        '200':
-          description: 200 response
-          content: {}
-        '201':
-          description: 201 response
-          content: {}
-        '202':
-          description: 202 response
-          content: {}
-        '400':
-          description: 400 response
-          content: {}
-        '401':
-          description: 401 response
-          content: {}
-        '403':
-          description: 403 response
-          content: {}
-        '500':
-          description: 500 response
-          content: {}
-      security:
-        - Cognito: []
+      operationId: manage-update-vendor
+      summary: Get Update
+      description: |-
+        API used to check if the there is an update available. 
+
+        It reads the vendor path parameters to check the vendor (as gilbarco/gilbarcobeta, wayne/waynebeta, etc...) and the version sent as header.
+
+        If an update is available, it creates an update file specifically for that FuelStation that the user can download with the API /manage/update. 
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: x-dc-version
+          description: The version of the client
+          deprecated: true
+        - schema:
+            type: string
+          in: header
+          name: version
+          description: The version of the client
+    parameters:
+      - schema:
+          type: string
+        name: vendor
+        in: path
+        required: true
   /startup/logs:
     get:
       responses:
@@ -473,6 +325,18 @@ components:
       type: oauth2
       flows:
         password:
-          tokenUrl: ''
-          refreshUrl: ''
           scopes: {}
+          tokenUrl: 'https://cognito-idp.eu-west-1.amazonaws.com/'
+          refreshUrl: 'https://cognito-idp.eu-west-1.amazonaws.com/'
+      description: ''
+  schemas:
+    Def-APIGW-Response:
+      title: Def-APIGW-Response
+      x-stoplight:
+        id: vp6lgl29wvwzp
+      type: object
+      properties:
+        message:
+          type: string
+          x-stoplight:
+            id: gxucm58aypyfj
