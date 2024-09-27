@@ -6,7 +6,7 @@ on:
 
 jobs:
   api-doc-deploy:
-    name: Deploy Data Collection Agents API doc on Bump
+    name: Deploy ICAD Sistemi Agents API doc on Bump
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
