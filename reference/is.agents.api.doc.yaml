@@ -13,6 +13,8 @@ servers:
 paths:
   /health:
     head:
+      tags:
+        - Health
       responses:
         '200':
           description: 200 response
@@ -34,6 +36,8 @@ paths:
       summary: Health Check
   /installer/agents:
     get:
+      tags:
+        - Installer
       responses:
         '200':
           description: |-
@@ -87,6 +91,8 @@ paths:
       summary: Download Agents List
   /installer/agents/download:
     get:
+      tags:
+        - Installer
       parameters:
         - name: x-agent-name
           in: header
@@ -114,6 +120,8 @@ paths:
       summary: Download Agent
   /installer/license:
     get:
+      tags:
+        - Installer
       parameters:
         - name: x-fuelstation-code
           in: header
@@ -146,6 +154,8 @@ paths:
       summary: Download FuelStation License
   /installer/versions:
     get:
+      tags:
+        - Installer
       responses:
         '200':
           description: 200 response
@@ -200,6 +210,8 @@ paths:
       description: API used by the Agents Installer to retrieve a list of the versions of every agent.
   /manage/update:
     get:
+      tags:
+        - Manage
       parameters:
         - name: vendor
           in: header
@@ -232,6 +244,8 @@ paths:
       summary: Get Update Binary
   '/manage/update/{vendor}':
     get:
+      tags:
+        - Manage
       responses:
         '200':
           description: 200 response. It replies with a key (MD5) of the file in order to check it after dowloading it.
@@ -298,6 +312,8 @@ paths:
         required: true
   /startup/logs:
     get:
+      tags:
+        - Startup
       responses:
         '200':
           description: 200 response
